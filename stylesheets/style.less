@@ -1,0 +1,99 @@
+/*
+ * Primary styles
+ *
+ * Author: Samir Fors
+ */
+
+/*****Colors*****/
+@settings_background:   #efefef;
+@bg_blue:               #c7eafb;
+@klarna_blue:           #00aeef;
+@darker_blue:           #006991;
+@greenish:              #89c177;
+@redish:                #cc6666;
+
+/*****Other styles*****/
+.rounded-corners (@r1:0, @r2:0, @r3:0, @r4:0) {
+    border-radius: @r1 @r2 @r3 @r4;
+    -webkit-border-radius: @r1 @r2 @r3 @r4;
+    -moz-border-radius: @r1 @r2 @r3 @r4;
+}
+
+.vertical-gradient-two-stops (@s1:0, @c1:#ccc, @s2:50%, @c2:#ddd) {
+    background:@c1;
+    background:-webkit-gradient(linear,
+                                left bottom,
+                                left top,
+                                color-stop(@s1, @c1),
+                                color-stop(@s2, @c2));
+    background:-moz-linear-gradient(center bottom,
+                                    @c1 @s1,
+                                    @c2 @s2);
+    background:-o-linear-gradient(center bottom,
+                                  @c1 @s1,
+                                  @c2 @s2);
+    background:linear-gradient(center bottom,
+                               @c1 @s1,
+                               @c2 @s2);
+}
+.vertical-gradient-three-stops (@s1:0, @c1:#ccc, @s2:50%, @c2:#eee, @s3:100%, @c3:#eee) {
+    background:@c1;
+    background:-webkit-gradient(linear,
+                                left bottom,
+                                left top,
+                                color-stop(@s1, @c1),
+                                color-stop(@s2, @c2),
+                                color-stop(@s3, @c3));
+    background:-moz-linear-gradient(center bottom,
+                                    @c1 @s1,
+                                    @c2 @s2,
+                                    @c3 @s3);
+    background:-o-linear-gradient(center bottom,
+                                  @c1 @s1,
+                                  @c2 @s2,
+                                  @c3 @s3);
+    background:linear-gradient(center bottom,
+                               @c1 @s1,
+                               @c2 @s2,
+                               @c3 @s3);
+}
+.vertical-gradient-four-stops (@s1:0, @c1:#ccc, @s2:50%, @c2:#ddd, @s3:50%, @c3:#eee, @s4:100%, @c4:#fff) {
+    background:@c1;
+    background:-webkit-gradient(linear,
+                                left bottom,
+                                left top,
+                                color-stop(@s1, @c1),
+                                color-stop(@s2, @c2),
+                                color-stop(@s3, @c3),
+                                color-stop(@s4, @c4));
+    background:-moz-linear-gradient(center bottom,
+                                    @c1 @s1,
+                                    @c2 @s2,
+                                    @c3 @s3,
+                                    @c4 @s4);
+    background:-o-linear-gradient(center bottom,
+                                  @c1 @s1,
+                                  @c2 @s2,
+                                  @c3 @s3,
+                                  @c4 @s4);
+    background:linear-gradient(center bottom,
+                               @c1 @s1,
+                               @c2 @s2,
+                               @c3 @s3,
+                               @c4 @s4);
+}
+
+.text-shadow (@h:2px,@v:1px,@b:0,@c:#fff) {
+    text-shadow:@h @v @b @c;
+}
+
+.box-shadow (@c:#222, @v:5px, @h:5px, @b:5px) {
+    -webkit-box-shadow: @c @v @h @b;
+    -moz-box-shadow: @c @v @h @b;
+    box-shadow: @c @v @h @b;
+}
+.box-shadow-inset (@v:0, @h:0, @b:2px, @c:#999) {
+    -moz-box-shadow:inset @c @v @h @b;
+    -webkit-box-shadow:inset @c @v @h @b;
+    box-shadow:inset @c @v @h @b;
+}
