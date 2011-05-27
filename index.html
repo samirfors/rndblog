@@ -46,12 +46,141 @@
     </header>
     <div class="mainarea">
       <div class="container">
+        
+        <div class="row post">
+          <div class="three columns metainfo alpha">
+            <p>By: Tobbe</p>
+          </div><!--! end .metainfo -->
+          <div class="nine columns postcontent omega">
+            <h1>Using SimpleBridge</h1>
+            <p>I like SimpleBridge; written by Rusty and part of Nitrogen. I often use it as a separate component, i.e without using Nitrogen. SimpleBridge provides an abstraction above the underlying HTTP engine. Apart from being a nice programming model it also makes it very easy to replace that HTTP engine if you so should wish.</p>
+            <p>Usually I use SimpleBridge together with Yaws, together with one of my rebar templates. The setup, shown below, is dead easy:</p>
 
+            <pre>start_link(yaws) ->
+                SL = [{appmods,    [{"/", ?MODULE}]},
+                      {port,       bfp:port()},
+                      {servername, bfp:servername()},
+                      {listen,     bfp:ip()}],
+                GL = [{logdir,     bfp:log_dir()},
+                      {cache_refresh_secs, 5}],
+                ok = yaws:start_embedded(bfp:docroot(), SL, GL, "bfp"),
+                {ok, whereis(yaws_sup)};</pre>
+            <p>In the example above I hijack the URL space using an appmod. Every HTTP request to the system will end up with a call to the out/1 function and it is there the SimpleBridge magic happends:</p>
+
+            <pre>out(Info) ->
+                RequestBridge = simple_bridge:make_request(yaws_request_bridge, Info),
+                ResponseBridge = simple_bridge:make_response(yaws_response_bridge, Info),
+                bfp:run(RequestBridge, ResponseBridge).</pre>
+            <p>The rest of the code will only deal with the RequestBridge and ResponseBridge objects (which are two parameterized modules):</p>
+
+            <pre>run(Request, Response0) ->
+                Method  = Request:request_method(),
+                Path    = Request:path(),
+                   ...snip...
+                Response:build_response().</pre>
+            <p>Note how data is extracted from the HTTP engine. At the end a response is produced. The response is built up during the processing of the request. With a helper function it can look like this:</p>
+
+            <pre>bfp:mk_response(Response, 200,
+                               [{"Content-Type", "text/html"}],
+                               Data);
+            where mk_response/4 is implemented as:
+
+            %% Create a SimpleBridge response
+            mk_response(Response, StatusCode, Headers, Data) ->
+                foldf([mk_status_code(StatusCode),
+                       mk_headers(Headers),
+                       mk_data(Data)],
+                      Response).
+
+            mk_status_code(StatusCode) ->
+                fun(Response) -> Response:status_code(StatusCode) end.
+
+            mk_headers(Headers) ->
+                fun(Response) ->
+                        lists:foldl(fun({H,V},R) -> R:header(H,V) end, Response, Headers)
+                end.
+
+            mk_data(Data) ->
+                fun(Response) -> Response:data(Data) end.
+
+            foldf(Fs,Db) ->
+                lists:foldl(fun(F,D) -> F(D) end, Db, Fs).</pre>
+            <p>Now, before you run off to play with this, I just want to mention that SimpleBridge has had a dependency to a certain version of Yaws because it has used its own copy of the yaws_api.hrl include file. I have just remedied this by introducing some accessor functions to Yaws. So until these patches become mainstream you'll have to use the latest versions in respective repo.</p>
+
+            <p>Finally, just to be complete, here is how I could setup the use of some other HTTP engines:</p>
+
+            <pre>start_link(inets) ->
+                inets:start(),
+                {ok, Pid} =
+                    inets:start(httpd,
+                                [{port,           bfp:port()}
+                                 ,{server_name,   bfp:servername()},
+                                 ,{bind_address,  bfp:ip()}
+                                 ,{server_root,   "."}
+                                 ,{document_root, bfp:docroot()}
+                                 ,{modules,       [?MODULE]}
+                                 ,{mime_types,    [{"css",  "text/css"},
+                                                   {"js",   "text/javascript"},
+                                                   {"html", "text/html"}]}
+                                ]),
+                link(Pid),
+                {ok, Pid};
+
+            start_link(mochiweb) ->
+                mochiweb:start(),
+                Options = [{port,   bfp:port()}
+                           ,{name,  bfp:servername()}
+                           ,{ip,    bfp:ip()}
+                           ,{loop,  fun(Req) -> do_mochiweb(Req) end}
+                          ],
+                {ok, Pid} = mochiweb_http:start(Options),
+                link(Pid),
+                {ok, Pid}.
+
+            %% Inets
+            do(Info) ->
+                RequestBridge = simple_bridge:make_request(inets_request_bridge, Info),
+                ResponseBridge = simple_bridge:make_response(inets_response_bridge, Info),
+                bfp:run(RequestBridge, ResponseBridge).
+
+            do_mochiweb(Info) ->
+                RequestBridge = simple_bridge:make_request(mochiweb_request_bridge, {Info,"./www"}),
+                ResponseBridge = simple_bridge:make_response(mochiweb_response_bridge, {Info, "./www"}),
+                bfp:run(RequestBridge, ResponseBridge).</pre>
+            <p>Cheers, Tobbe</p>
+          </div><!--! end .postcontent -->
+        </div>
+        
+        <div class="row post">
+          <div class="three columns metainfo alpha">
+            <p>By: Tobbe</p>
+          </div>
+          <div class="nine columns postcontent omega">
+            <h1>External access to Intranet Polish</h1>
+            <p>We are making heavy use of Polish for all our translation efforts. So far we have been using our in-house personnel to do the actual translation work. However, increasing demands for both quality and quantity made us look for external translators. The problem was how to open up the external access to each and everyone of our internal developers running Polish.</p>
+
+            <p>The solution we now have cooked up (cred to cjk who did all the hard work based on a proof of concept of mine) uses Nginx as a reverse proxy. The Nginx server proxies an external requests to a developers Polish system. The way to address a particular developer is made by the external domain name. This external domain name is constructed as:</p>
+
+            <pre>http://<branch-name>.i18n.klarna.com</pre>
+
+            <p>The Nginx server will match on this and proxy the request to the right Polish system and developer. Now the cool thing here is that this Nginx configuration is operated by a Yaws appmod running on the same machine. This appmod provides a RESTlike interface that Polish understands. So when the developer starts his Polish instance, Polish talks to the Yaws system which loads the proper configuration into the Nginx proxy. Here is a picture describing it:</p>
+            
+            <img class="eleven columns" src="http://redhoterlang.com/blob/9725997ed30107783686359195d7d1a0" />
+
+            <p>Enginxx is the name of the Yaws appmod and works as a switchboard, loading/unloading Nginx configurations on behalf of the developers Polish systems. Via the REST interface it is possible to create and remove Nginx configurations.</p>
+
+            <p>Since we have poked a hole in our firwall and is instructing Nginx to proxy incoming request we need to address the security. We don't want anyone to be able to setup a Nginx proxy configuration, hence we sign each REST request. To produce the Signature we make use of the users SSH key-pairs. Since we already are using gitosis to handle the access to our git repository, we easily can reuse our developers public SSH key to verify the signature produced by Polish (using the developers private SSH key). To be able to do this we had to write some code to leverage the existing SSH OTP library.</p>
+
+            <p>All this may look complicated but for the developers almost nothing has changed, they just have to add one new switch (-x) to the Polish start script. Our external translators receive a mail with the URL leading to the correct developers Polish system. The translator will log in as before using OpenID. It all seem to work very smooth and we are happy.</p>
+
+            <p>Cheers, Tobbe</p>
+          </div><!--! end .postcontent -->
+        </div>
         <div class="row post">
           <div class="three columns metainfo alpha">
             <p>By: Samir</p>
           </div><!--! end .metainfo -->
-          <div class="eight columns postcontent omega">
+          <div class="nine columns postcontent omega">
             <h1>Headline</h1>
             <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Fusce in leo mi. Nullam eleifend augue vel mi ornare ut molestie nisi egestas. Curabitur magna tortor, venenatis nec fringilla accumsan, faucibus in purus. Donec ultricies bibendum risus. Vivamus turpis tellus, ultrices nec pretium eu, facilisis in purus. Aliquam lobortis enim vestibulum odio lacinia placerat et ac quam. Cras vel magna odio, in ultricies risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse vulputate facilisis lacus, ut aliquam mi dignissim nec.</p>
 							<blockquote>Pellentesque eu urna felis. Curabitur est tortor, venenatis vel tristique sed, cursus vel justo.</blockquote>
