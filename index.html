@@ -23,8 +23,9 @@
   ================================================== -->
   <link rel="stylesheet" href="stylesheets/base.css">
   <link rel="stylesheet" href="stylesheets/skeleton.css">
-  <!-- <link rel="stylesheet" href="stylesheets/layout.css"> -->
   <link rel="stylesheet/less" type="text/css" href="stylesheets/style.less">
+  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" />
+  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeRDark.css" />
 
   <!-- Favicons
   ================================================== -->
@@ -56,7 +57,8 @@
             <p>I like SimpleBridge; written by Rusty and part of Nitrogen. I often use it as a separate component, i.e without using Nitrogen. SimpleBridge provides an abstraction above the underlying HTTP engine. Apart from being a nice programming model it also makes it very easy to replace that HTTP engine if you so should wish.</p>
             <p>Usually I use SimpleBridge together with Yaws, together with one of my rebar templates. The setup, shown below, is dead easy:</p>
 
-            <pre>start_link(yaws) ->
+            <pre class="brush: erlang">
+              start_link(yaws) ->
                 SL = [{appmods,    [{"/", ?MODULE}]},
                       {port,       bfp:port()},
                       {servername, bfp:servername()},
@@ -64,23 +66,32 @@
                 GL = [{logdir,     bfp:log_dir()},
                       {cache_refresh_secs, 5}],
                 ok = yaws:start_embedded(bfp:docroot(), SL, GL, "bfp"),
-                {ok, whereis(yaws_sup)};</pre>
+                {ok, whereis(yaws_sup)};
+            </pre>
+            
             <p>In the example above I hijack the URL space using an appmod. Every HTTP request to the system will end up with a call to the out/1 function and it is there the SimpleBridge magic happends:</p>
 
-            <pre>out(Info) ->
+            <pre class="brush: erlang">
+              out(Info) ->
                 RequestBridge = simple_bridge:make_request(yaws_request_bridge, Info),
                 ResponseBridge = simple_bridge:make_response(yaws_response_bridge, Info),
-                bfp:run(RequestBridge, ResponseBridge).</pre>
+                bfp:run(RequestBridge, ResponseBridge).
+            </pre>
+                
             <p>The rest of the code will only deal with the RequestBridge and ResponseBridge objects (which are two parameterized modules):</p>
 
-            <pre>run(Request, Response0) ->
+            <pre class="brush: erlang">
+              run(Request, Response0) ->
                 Method  = Request:request_method(),
                 Path    = Request:path(),
                    ...snip...
-                Response:build_response().</pre>
+                Response:build_response().
+            </pre>
+            
             <p>Note how data is extracted from the HTTP engine. At the end a response is produced. The response is built up during the processing of the request. With a helper function it can look like this:</p>
 
-            <pre>bfp:mk_response(Response, 200,
+            <pre class="brush: erlang">
+              bfp:mk_response(Response, 200,
                                [{"Content-Type", "text/html"}],
                                Data);
             where mk_response/4 is implemented as:
@@ -104,12 +115,15 @@
                 fun(Response) -> Response:data(Data) end.
 
             foldf(Fs,Db) ->
-                lists:foldl(fun(F,D) -> F(D) end, Db, Fs).</pre>
+                lists:foldl(fun(F,D) -> F(D) end, Db, Fs).
+            </pre>
+            
             <p>Now, before you run off to play with this, I just want to mention that SimpleBridge has had a dependency to a certain version of Yaws because it has used its own copy of the yaws_api.hrl include file. I have just remedied this by introducing some accessor functions to Yaws. So until these patches become mainstream you'll have to use the latest versions in respective repo.</p>
 
             <p>Finally, just to be complete, here is how I could setup the use of some other HTTP engines:</p>
 
-            <pre>start_link(inets) ->
+            <pre class="brush: erlang">
+              start_link(inets) ->
                 inets:start(),
                 {ok, Pid} =
                     inets:start(httpd,
@@ -146,8 +160,11 @@
             do_mochiweb(Info) ->
                 RequestBridge = simple_bridge:make_request(mochiweb_request_bridge, {Info,"./www"}),
                 ResponseBridge = simple_bridge:make_response(mochiweb_response_bridge, {Info, "./www"}),
-                bfp:run(RequestBridge, ResponseBridge).</pre>
+                bfp:run(RequestBridge, ResponseBridge).
+            </pre>
+            
             <p>Cheers, Tobbe</p>
+          
           </div><!--! end .postcontent -->
         </div>
         
@@ -161,11 +178,11 @@
 
             <p>The solution we now have cooked up (cred to cjk who did all the hard work based on a proof of concept of mine) uses Nginx as a reverse proxy. The Nginx server proxies an external requests to a developers Polish system. The way to address a particular developer is made by the external domain name. This external domain name is constructed as:</p>
 
-            <pre>http://<branch-name>.i18n.klarna.com</pre>
+            <pre class="brush: erlang">http://<branch-name>.i18n.klarna.com</pre>
 
             <p>The Nginx server will match on this and proxy the request to the right Polish system and developer. Now the cool thing here is that this Nginx configuration is operated by a Yaws appmod running on the same machine. This appmod provides a RESTlike interface that Polish understands. So when the developer starts his Polish instance, Polish talks to the Yaws system which loads the proper configuration into the Nginx proxy. Here is a picture describing it:</p>
-            
-            <img class="eleven columns" src="http://redhoterlang.com/blob/9725997ed30107783686359195d7d1a0" />
+
+              <img class="twelve columns" src="http://redhoterlang.com/blob/9725997ed30107783686359195d7d1a0" />
 
             <p>Enginxx is the name of the Yaws appmod and works as a switchboard, loading/unloading Nginx configurations on behalf of the developers Polish systems. Via the REST interface it is possible to create and remove Nginx configurations.</p>
 
@@ -233,6 +250,28 @@
     <script>window.jQuery || document.write("<script src='javascripts/jquery-1.5.1.min.js'>\x3C/script>")</script>
     <script src="javascripts/less-1.1.0.min.js"></script>
     <script src="javascripts/app.js"></script>
+    <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js"></script>
+    <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shAutoloader.js"></script>
+    
+    <script>
+    SyntaxHighlighter.defaults['tab-size'] = 2;
+    SyntaxHighlighter.defaults['gutter'] = false;
+    SyntaxHighlighter.defaults['toolbar'] = false;
+    SyntaxHighlighter.defaults['class-name'] = 'twelve columns code';
+    SyntaxHighlighter.autoloader(
+      'js jscript javascript  http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js',
+      'applescript            http://alexgorbatchev.com/pub/sh/current/scripts/shBrushAppleScript.js',
+      'erlang                 http://alexgorbatchev.com/pub/sh/current/scripts/shBrushErlang.js',
+      'css                    http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js',
+      'python                 http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPython.js',
+      'php                    http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js',
+      'ruby                   http://alexgorbatchev.com/pub/sh/current/scripts/shBrushRuby.js',
+      'sql                    http://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js',
+      'html                   http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js'
+    );
+
+    SyntaxHighlighter.all();
+    </script>
 
     <!-- End Document
     ================================================== -->
