@@ -50,7 +50,8 @@
         
         <div class="row post">
           <div class="three columns metainfo alpha">
-            <p>By: Tobbe</p>
+            <p>By: <strong>Tobbe</strong> <br />
+              Mar 5, 2011</p>
           </div><!--! end .metainfo -->
           <div class="nine columns postcontent omega">
             <h1>Using SimpleBridge</h1>
@@ -91,9 +92,9 @@
             <p>Note how data is extracted from the HTTP engine. At the end a response is produced. The response is built up during the processing of the request. With a helper function it can look like this:</p>
 
             <pre class="brush: erlang">
-              bfp:mk_response(Response, 200,
-                               [{"Content-Type", "text/html"}],
-                               Data);
+            bfp:mk_response(Response, 200,
+                            [{"Content-Type", "text/html"}],
+                            Data);
             where mk_response/4 is implemented as:
 
             %% Create a SimpleBridge response
@@ -123,44 +124,44 @@
             <p>Finally, just to be complete, here is how I could setup the use of some other HTTP engines:</p>
 
             <pre class="brush: erlang">
-              start_link(inets) ->
-                inets:start(),
-                {ok, Pid} =
-                    inets:start(httpd,
-                                [{port,           bfp:port()}
-                                 ,{server_name,   bfp:servername()},
-                                 ,{bind_address,  bfp:ip()}
-                                 ,{server_root,   "."}
-                                 ,{document_root, bfp:docroot()}
-                                 ,{modules,       [?MODULE]}
-                                 ,{mime_types,    [{"css",  "text/css"},
-                                                   {"js",   "text/javascript"},
-                                                   {"html", "text/html"}]}
-                                ]),
-                link(Pid),
-                {ok, Pid};
+            start_link(inets) ->
+              inets:start(),
+              {ok, Pid} =
+                  inets:start(httpd,
+                              [{port,           bfp:port()}
+                               ,{server_name,   bfp:servername()},
+                               ,{bind_address,  bfp:ip()}
+                               ,{server_root,   "."}
+                               ,{document_root, bfp:docroot()}
+                               ,{modules,       [?MODULE]}
+                               ,{mime_types,    [{"css",  "text/css"},
+                                                 {"js",   "text/javascript"},
+                                                 {"html", "text/html"}]}
+                              ]),
+              link(Pid),
+              {ok, Pid};
 
             start_link(mochiweb) ->
-                mochiweb:start(),
-                Options = [{port,   bfp:port()}
-                           ,{name,  bfp:servername()}
-                           ,{ip,    bfp:ip()}
-                           ,{loop,  fun(Req) -> do_mochiweb(Req) end}
-                          ],
-                {ok, Pid} = mochiweb_http:start(Options),
-                link(Pid),
-                {ok, Pid}.
+              mochiweb:start(),
+              Options = [{port,   bfp:port()}
+                         ,{name,  bfp:servername()}
+                         ,{ip,    bfp:ip()}
+                         ,{loop,  fun(Req) -> do_mochiweb(Req) end}
+                        ],
+              {ok, Pid} = mochiweb_http:start(Options),
+              link(Pid),
+              {ok, Pid}.
 
             %% Inets
             do(Info) ->
-                RequestBridge = simple_bridge:make_request(inets_request_bridge, Info),
-                ResponseBridge = simple_bridge:make_response(inets_response_bridge, Info),
-                bfp:run(RequestBridge, ResponseBridge).
+              RequestBridge = simple_bridge:make_request(inets_request_bridge, Info),
+              ResponseBridge = simple_bridge:make_response(inets_response_bridge, Info),
+              bfp:run(RequestBridge, ResponseBridge).
 
             do_mochiweb(Info) ->
-                RequestBridge = simple_bridge:make_request(mochiweb_request_bridge, {Info,"./www"}),
-                ResponseBridge = simple_bridge:make_response(mochiweb_response_bridge, {Info, "./www"}),
-                bfp:run(RequestBridge, ResponseBridge).
+              RequestBridge = simple_bridge:make_request(mochiweb_request_bridge, {Info,"./www"}),
+              ResponseBridge = simple_bridge:make_response(mochiweb_response_bridge, {Info, "./www"}),
+              bfp:run(RequestBridge, ResponseBridge).
             </pre>
             
             <p>Cheers, Tobbe</p>
@@ -257,7 +258,7 @@
     SyntaxHighlighter.defaults['tab-size'] = 2;
     SyntaxHighlighter.defaults['gutter'] = false;
     SyntaxHighlighter.defaults['toolbar'] = false;
-    SyntaxHighlighter.defaults['class-name'] = 'twelve columns code';
+    SyntaxHighlighter.defaults['class-name'] = 'eleven columns code';
     SyntaxHighlighter.autoloader(
       'js jscript javascript  http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js',
       'applescript            http://alexgorbatchev.com/pub/sh/current/scripts/shBrushAppleScript.js',
