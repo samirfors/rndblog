@@ -41,13 +41,11 @@
 
   <!-- CSS
   ================================================== -->
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-	<?php
-	wp_register_style('style', get_bloginfo('template_directory').'/stylesheets/style.less');  
-	wp_enqueue_style('style', get_bloginfo('template_directory').'/stylesheets/style.less');
-	?>
-  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" />
-  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeRDark.css" />
+	<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/stylesheets/base.css">
+  <link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/stylesheets/skeleton.css">
+	<link rel="stylesheet/less" type="text/css" href="<?php bloginfo( 'template_url' ); ?>/stylesheets/rndblog.less" />
+  <!-- <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" />
+  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeRDark.css" /> -->
 	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
