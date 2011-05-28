@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> 	<html <?php language_attributes(); ?>> <!--<![endif]-->
+<head>
+
+  <!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+  <title><?php
+		/*
+		 * Print the <title> tag based on what is being viewed.
+		 */
+		global $page, $paged;
+
+		wp_title( '|', true, 'right' );
+
+		// Add the blog name.
+		bloginfo( 'name' );
+
+		// Add the blog description for the home/front page.
+		$site_description = get_bloginfo( 'description', 'display' );
+		if ( $site_description && ( is_home() || is_front_page() ) )
+			echo " | $site_description";
+
+		// Add a page number if necessary:
+		if ( $paged >= 2 || $page >= 2 )
+			echo ' | ' . sprintf( __( 'Page %s', 'twentyten' ), max( $paged, $page ) );
+
+		?></title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+
+  <!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+	<?php
+	wp_register_style('style', get_bloginfo('template_directory').'/stylesheets/style.less');  
+	wp_enqueue_style('style', get_bloginfo('template_directory').'/stylesheets/style.less');
+	?>
+  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" />
+  <link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeRDark.css" />
+	
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
+  <!-- Favicons
+  ================================================== -->
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+
+	<?php
+		/* We add some JavaScript to pages with the comment form
+		 * to support sites with threaded comments (when in use).
+		 */
+		if ( is_singular() && get_option( 'thread_comments' ) )
+			wp_enqueue_script( 'comment-reply' );
+
+		/* Always have wp_head() just before the closing </head>
+		 * tag of your theme, or you will break many plugins, which
+		 * generally use this hook to add elements to <head> such
+		 * as styles, scripts, and meta tags.
+		 */
+		wp_head();
+	?>
+  </head>
+  <body>
+    <!-- Primary Page Layout
+    ================================================== -->
+
+    <!-- Delete everything in this .container and get started on your own site! -->
+    <header>
+      <div class="container">
+        <h1>BLOG</h1>
+      </div><!--! container -->
+    </header>
