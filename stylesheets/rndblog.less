@@ -100,6 +100,12 @@
 
 body {
   background:#eee;
+  a {
+    text-decoration:none;
+    &:hover {
+      color:@klarna_blue;
+    }
+  }
 }
 header {
   margin:0 0 20px 0;
@@ -109,16 +115,26 @@ header {
       padding: 20px 0 0;
       margin:0 0 -20px 0;
     }
+    #searchform {
+      margin:20px 0 0 0;
+      label {
+        display:none;
+      }
+      #s {
+        float:left;
+        width:200px;
+        margin:0;
+      }
+      #searchsubmit {
+        margin:2px 0 0 0;
+        float:left;
+      }
+    }
   }
 }
 nav {
   height:30px;
   ul {
-/*    background:#00aeef;
-    height:35px;
-    padding:20px;
-    line-height:35px;
-    width:185px;*/
     li {
       display:inline;
       line-height:69px;
@@ -127,7 +143,6 @@ nav {
         background:@klarna_blue;
       }
       a {
-        text-decoration:none;
         padding:10px;
       }
     }
@@ -141,11 +156,19 @@ nav {
 
 article {
 	.postcontent {
+	  h1 {
+	    font-family:arial;
+	    a {
+	    }
+	  }
+	  p {
+	    font-size:12px;
+	    font-family:georgia;
+	  }
 		.metainformation {
 			font-size:12px;
 		}
 	}
 }
 footer {
-  background:darken(@klarna_blue,0%);
 }

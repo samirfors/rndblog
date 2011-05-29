@@ -71,13 +71,16 @@
 					<div class="logo five columns alpha">
 						<a href="<?php echo home_url( '/' ); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/klarna_smaller.png" /></a>
 					</div>
-					<nav class="menu eight columns omega">
+					<nav class="menu six columns">
 						<ul>
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Career</a></li>
 							<li><a href="#">About</a></li>
 						</ul>
 					</nav>
+					<div class="widgets five columns omega">
+							<?php get_search_form(); ?>
+					</div>
 				</div><!--! end .row -->
       </div><!--! end .container -->
     </header>
