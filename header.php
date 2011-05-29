@@ -80,6 +80,6 @@
     </header>
 		<section class="banner">
 			<div class="container">
-			<img src="http://placehold.it/960x100" />
+			<img src="http://placehold.it/934x100" />
 			</div>
 		</section>

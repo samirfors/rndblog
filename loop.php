@@ -43,7 +43,7 @@
 								<?php //the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyten' ) ); ?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
 					<?php endif; ?>
-					<p class="readmore"><a href="">Read more</a></p>
+					<p class="readmore"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__('Link to %s', 'rndblog'), the_title_attribute('echo=0') ); ?>" rel="bookmark">Read more</a></p>
 		  	</div><!--! end .postcontent -->
 			</div><!--! end .row -->
 			<div class="row">
