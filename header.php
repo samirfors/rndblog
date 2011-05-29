@@ -71,16 +71,24 @@
 					<div class="logo five columns alpha">
 						<a href="<?php echo home_url( '/' ); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/klarna_smaller.png" /></a>
 					</div>
-					<nav class="menu six columns">
+					<nav class="menu eleven columns">
+						<!-- <ul>
+								<li><a href="#" class="active">Home</a></li>
+								<li><a href="#">Career</a></li>
+								<li><a href="#">About</a></li>
+							</ul> -->
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Career</a></li>
-							<li><a href="#">About</a></li>
+							<?php wp_list_pages('title_li='); ?>
 						</ul>
 					</nav>
-					<div class="widgets five columns omega">
+					<!-- <div class="widgets five columns omega">
 							<?php get_search_form(); ?>
-					</div>
+					</div> -->
 				</div><!--! end .row -->
       </div><!--! end .container -->
     </header>
+		<section class="banner">
+			<div class="container">
+			<h2>&nbsp;</h2>
+			</div>
+		</section>

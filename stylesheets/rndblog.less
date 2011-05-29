@@ -100,6 +100,8 @@
 
 body {
   background:#eee;
+  color: #222;
+  font: 12px/19px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
   a {
     text-decoration:none;
     &:hover {
@@ -108,12 +110,16 @@ body {
   }
 }
 header {
-  margin:0 0 20px 0;
-  border-bottom:1px solid @klarna_blue;
+  height:45px;
+  /*border-bottom:1px solid @klarna_blue;*/
   .container {
+    .logo {
+      line-height:70px;
+      height:45px;
+    }
     img {
-      padding: 20px 0 0;
-      margin:0 0 -20px 0;
+      /*padding: 20px 0 0;
+            margin:0 0 -20px 0;*/
     }
     #searchform {
       margin:20px 0 0 0;
@@ -130,23 +136,37 @@ header {
         float:left;
       }
     }
-  }
-}
-nav {
-  height:30px;
-  ul {
-    li {
-      display:inline;
-      line-height:69px;
-      padding:10px;
-      &:hover {
-        background:@klarna_blue;
-      }
-      a {
-        padding:10px;
+    nav {
+      ul {
+        float:right;
+        li {
+          font-family:georgia;
+          display:inline;
+          line-height:35px;
+          padding:5px 10px 10px;
+          border-top:5px solid #ccc;
+          &:hover {
+            border-top:5px solid @klarna_blue;
+          }
+          &.page_item {
+
+          }
+          &.current_page_item {
+            border-top:5px solid @klarna_blue;
+          }
+          a {
+            padding:10px;
+          }
+        }
       }
     }
   }
+}
+.banner {
+  margin:10px 0 30px 0;
+  height:70px;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIHWO8e/fufwYk8P79ewYmJD4DSEBQUBAhCBMAKQKrRBYAC6ILgAQBeIkSbQUuJEgAAAAASUVORK5CYII=) repeat;
+  //.vertical-gradient-two-stops;
 }
 .code {
   padding:5px 0 5px 5px;
@@ -158,17 +178,26 @@ article {
 	.postcontent {
 	  h1 {
 	    font-family:arial;
-	    a {
-	    }
 	  }
 	  p {
 	    font-size:12px;
 	    font-family:georgia;
+	    a {
+	      text-decoration:underline;
+	    }
 	  }
 		.metainformation {
 			font-size:12px;
 		}
 	}
+}
+aside {
+  .widget-container {
+    background:#fff;
+    .rounded-corners(5px,5px,5px,5px);
+    .box-shadow-inset;
+    padding: 10px;
+  }
 }
 footer {
 }
