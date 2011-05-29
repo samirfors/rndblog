@@ -30,7 +30,8 @@
 			<div class="row">		
 		    	<h1><?php the_title(); ?></h1>
 					<p class="metainformation">
-						by <strong><?php echo get_the_author(); ?></strong><br /> <?php the_time('F jS, Y'); ?>
+						by <strong><?php echo get_the_author(); ?></strong><br />
+						<?php the_time('F jS, Y'); ?>
 					</p>
 			</div><!--! end .row -->
 			<div class="row">
