@@ -141,7 +141,7 @@ header {
         float:right;
         li {
           font-family:georgia;
-          display:inline;
+          display:inline-block;
           line-height:35px;
           padding:5px 10px 10px;
           border-top:5px solid #ccc;
@@ -175,9 +175,16 @@ header {
 }
 
 article {
+  .row {
+    .leftcontent {
+      img {
+        border:10px solid #ddd;
+        .rounded-corners(5px,5px,5px,5px);
+      }
+    }
+  }
 	.postcontent {
 	  h1 {
-	    font-family:arial;
 	  }
 	  p {
 	    font-size:12px;
@@ -186,6 +193,12 @@ article {
 	      text-decoration:underline;
 	    }
 	  }
+	  .syntaxhighlighter {
+	    margin: -15px 0 20px 0 !important;
+	  }
+	  .readmore {
+      float:right;
+    }
 		.metainformation {
 			font-size:12px;
 		}
@@ -200,4 +213,6 @@ aside {
   }
 }
 footer {
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIHWO8e/fufwYk8P79ewYmJD4DSEBQUBAhCBMAKQKrRBYAC6ILgAQBeIkSbQUuJEgAAAAASUVORK5CYII=) repeat;
+  padding:20px;
 }

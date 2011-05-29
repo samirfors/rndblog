@@ -28,11 +28,16 @@
 
 		<article class="post" id="post-<?php the_ID(); ?>">
 			<div class="row">		
-				<div class="postcontent">
-		    	<h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__('Link to %s', 'rndblog'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		    	<h1><?php the_title(); ?></h1>
 					<p class="metainformation">
-						By: <strong><?php echo get_the_author(); ?></strong> <?php the_time('F jS, Y'); ?>
+						by <strong><?php echo get_the_author(); ?></strong><br /> <?php the_time('F jS, Y'); ?>
 					</p>
+			</div><!--! end .row -->
+			<div class="row">
+				<div class="leftcontent five columns alpha">
+					<img src="http://placehold.it/260x300" />
+				</div><!--! end .leftcontent -->
+				<div class="postcontent nine columns omega">
 				
 					<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
 								<?php the_excerpt(); ?>
@@ -41,9 +46,10 @@
 								<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyten' ) ); ?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
 					<?php endif; ?>
-				
-		  	</div><!--! end .postcontent -->
+				</div><!--! end .postcontent -->
 			</div><!--! end .row -->
+		  	
+			
 			<div class="row">
 				<div class="commentscontent">
 					<?php comments_template( '', true ); ?>

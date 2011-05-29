@@ -67,24 +67,15 @@
 
     <header>
       <div class="container">
-				<div class="row">
 					<div class="logo five columns alpha">
 						<a href="<?php echo home_url( '/' ); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/klarna_smaller.png" /></a>
 					</div>
 					<nav class="menu eleven columns">
-						<!-- <ul>
-								<li><a href="#" class="active">Home</a></li>
-								<li><a href="#">Career</a></li>
-								<li><a href="#">About</a></li>
-							</ul> -->
-						<ul>
-							<?php wp_list_pages('title_li='); ?>
-						</ul>
+							<?php wp_page_menu('show_home=1&menu_class=page-navi&sort_column=menu_order'); ?>
 					</nav>
 					<!-- <div class="widgets five columns omega">
 							<?php get_search_form(); ?>
 					</div> -->
-				</div><!--! end .row -->
       </div><!--! end .container -->
     </header>
 		<section class="banner">

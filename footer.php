@@ -1,6 +1,11 @@
     <footer>
       <div class="container">
-        <h3>Footer</h3>
+        <?php
+					/* A sidebar in the footer? Yep. You can can customize
+					 * your footer with four columns of widgets.
+					 */
+					get_sidebar( 'footer' );
+				?>
       </div><!--! end .container -->
     </footer>
     <!-- JS

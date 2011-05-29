@@ -28,12 +28,14 @@
 
 		<article class="post" id="post-<?php the_ID(); ?>">
 			<div class="row">		
-				<div class="postcontent">
-		    	<h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__('Link to %s', 'rndblog'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
-					<p class="metainformation">
+				<div class="metainformation three columns alpha">
+					<p>
 						By: <strong><?php echo get_the_author(); ?></strong> <?php the_time('F jS, Y'); ?>
 					</p>
-				
+				</div>
+				<div class="postcontent nine columns omega">
+		    	<h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__('Link to %s', 'rndblog'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+	
 					<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
 								<?php the_excerpt(); ?>
 					<?php else : ?>
@@ -41,7 +43,7 @@
 								<?php //the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyten' ) ); ?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
 					<?php endif; ?>
-				
+					<p class="readmore"><a href="">Read more</a></p>
 		  	</div><!--! end .postcontent -->
 			</div><!--! end .row -->
 			<div class="row">
