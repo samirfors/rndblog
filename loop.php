@@ -26,33 +26,29 @@
 	
 	<?php /* How to display all other posts. */ ?>
 
-		<div class="row post" id="post-<?php the_ID(); ?>">
-		  <div class="three columns metainfo alpha">
-		    <p>By: <strong><?php echo get_the_author(); ?></strong> <br />
-					<?php the_time('F jS, Y'); ?></p>
-		  </div><!--! end .metainfo -->
-		
-			<div class="nine columns postcontent omega">
-		    <h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__('Link to %s', 'rndblog'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		<article class="post" id="post-<?php the_ID(); ?>">
+			<div class="row">		
+				<div class="postcontent">
+		    	<h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__('Link to %s', 'rndblog'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+					<p class="metainformation">
+						By: <strong><?php echo get_the_author(); ?></strong> <?php the_time('F jS, Y'); ?>
+					</p>
 				
-				<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
-							<?php the_excerpt(); ?>
-				<?php else : ?>
-							<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyten' ) ); ?>
-							<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
-				<?php endif; ?>
+					<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
+								<?php the_excerpt(); ?>
+					<?php else : ?>
+								<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyten' ) ); ?>
+								<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
+					<?php endif; ?>
 				
-		  </div><!--! end .postcontent -->
-		</div><!--! end .post -->
-
-		<div class="row post">	
-			<div class="three columns metainfo alpha">
-				&nbsp;
-			</div>
-			<div class="nine columns postcontent omega">
-				<?php comments_template( '', true ); ?>
-			</div>
-		</div>
+		  	</div><!--! end .postcontent -->
+			</div><!--! end .row -->
+			<div class="row">
+				<div class="commentscontent">
+					<?php comments_template( '', true ); ?>
+				</div>
+			</div><!--! end .row -->
+		</article><!--! end .post -->
 
 	<?php endwhile; // End the loop. Whew. ?>
 

@@ -6,14 +6,14 @@
 
 get_header(); ?>
 
-	<div class="mainarea">
-  	<div class="container">
+	<div class="mainarea container">
+  	<section class="nine columns alpha">
 
 			<?php
 			 get_template_part( 'loop', 'index' );
 			?>
-		</div><!-- end .container -->
+		</section><!-- end .container -->
+		<?php get_sidebar(); ?>
 	</div><!-- end .mainarea -->
 
-<?php //get_sidebar(); ?>
 <?php get_footer(); ?>

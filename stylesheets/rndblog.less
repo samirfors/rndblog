@@ -101,9 +101,51 @@
 body {
   background:#eee;
 }
-
+header {
+  margin:0 0 20px 0;
+  border-bottom:1px solid @klarna_blue;
+  .container {
+    img {
+      padding: 20px 0 0;
+      margin:0 0 -20px 0;
+    }
+  }
+}
+nav {
+  height:30px;
+  ul {
+/*    background:#00aeef;
+    height:35px;
+    padding:20px;
+    line-height:35px;
+    width:185px;*/
+    li {
+      display:inline;
+      line-height:69px;
+      padding:10px;
+      &:hover {
+        background:@klarna_blue;
+      }
+      a {
+        text-decoration:none;
+        padding:10px;
+      }
+    }
+  }
+}
 .code {
-  padding:10px 0 10px 10px;
+  padding:5px 0 5px 5px;
   overflow-y: hidden !important;
+  font-size: 12px !important;
 }
 
+article {
+	.postcontent {
+		.metainformation {
+			font-size:12px;
+		}
+	}
+}
+footer {
+  background:darken(@klarna_blue,0%);
+}

@@ -67,6 +67,17 @@
 
     <header>
       <div class="container">
-        <h1>BLOG</h1>
-      </div><!--! container -->
+				<div class="row">
+					<div class="logo five columns alpha">
+						<a href="<?php echo home_url( '/' ); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/klarna_smaller.png" /></a>
+					</div>
+					<nav class="menu eight columns omega">
+						<ul>
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Career</a></li>
+							<li><a href="#">About</a></li>
+						</ul>
+					</nav>
+				</div><!--! end .row -->
+      </div><!--! end .container -->
     </header>
