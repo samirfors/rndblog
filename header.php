@@ -46,6 +46,9 @@
 	<link rel="stylesheet/less" type="text/css" href="<?php bloginfo( 'template_url' ); ?>/stylesheets/rndblog.less" />
 	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+  <script>
+    var disqus_developer = 1;
+  </script>
 
   <!-- Favicons
   ================================================== -->
@@ -80,6 +83,7 @@
     </header>
 		<section class="banner">
 			<div class="container">
-			<img src="http://placehold.it/934x100" />
+			<!-- <img src="http://placehold.it/934x100" /> -->
+			<img src="http://flickholdr.com/934/150/imac,coding/6" alt="Placeholder image from flickholdr.com" />
 			</div>
 		</section>
