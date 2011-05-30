@@ -7,7 +7,7 @@
 get_header(); ?>
 
 	<div class="mainarea container">
-  	<section class="fourteen columns">
+  	<section class="sixteen columns">
 
 			<?php
 			 get_template_part( 'loop', 'single' );

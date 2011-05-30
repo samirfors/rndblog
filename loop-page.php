@@ -13,9 +13,9 @@
 			</div><!--! end .row -->
 			<div class="row">
 				<div class="leftcontent five columns alpha">
-					<img src="http://placehold.it/260x300" />
+					<img src="http://placehold.it/240x300" />
 				</div><!--! end .leftcontent -->
-				<div class="postcontent nine columns omega">
+				<div class="postcontent ten columns omega">
 				
 					<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
 								<?php the_excerpt(); ?>

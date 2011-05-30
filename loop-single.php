@@ -36,9 +36,9 @@
 			</div><!--! end .row -->
 			<div class="row">
 				<div class="leftcontent five columns alpha">
-					<img src="http://placehold.it/260x300" />
+					<img src="http://placehold.it/240x240" />
 				</div><!--! end .leftcontent -->
-				<div class="postcontent nine columns omega">
+				<div class="postcontent ten columns omega">
 				
 					<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
 								<?php the_excerpt(); ?>
@@ -52,7 +52,7 @@
 		  	
 			
 			<div class="row">
-				<div class="commentscontent">
+				<div class="commentscontent fifteen columns">
 					<?php comments_template( '', true ); ?>
 				</div>
 			</div><!--! end .row -->

@@ -182,8 +182,17 @@ header {
 }
 
 article {
+  &.post {
+    border-top:1px solid #ccc;
+  }
   .row {
     .leftcontent {
+      img {
+        border:10px solid #ddd;
+        .rounded-corners(5px,5px,5px,5px);
+      }
+    }
+    .metainformation {
       img {
         border:10px solid #ddd;
         .rounded-corners(5px,5px,5px,5px);
@@ -220,6 +229,7 @@ aside {
   }
 }
 footer {
+  border-top:1px solid #ccc;
   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIHWO8e/fufwYk8P79ewYmJD4DSEBQUBAhCBMAKQKrRBYAC6ILgAQBeIkSbQUuJEgAAAAASUVORK5CYII=) repeat;
   padding:20px;
 }

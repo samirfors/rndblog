@@ -7,7 +7,7 @@
 get_header(); ?>
 
 	<div class="mainarea container">
-  	<section class="twelve columns alpha">
+  	<section class="sixteen columns alpha">
 
 			<?php
 			 get_template_part( 'loop', 'index' );
