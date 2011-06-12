@@ -30,7 +30,7 @@
 			<div class="row">		
 				<div class="metainformation four columns alpha">
 					<p>
-						By: <strong><?php echo get_the_author(); ?></strong> <?php the_time('F jS, Y'); ?>
+						By: <strong><?php echo get_the_author(); ?></strong> <br /><?php the_time('F jS, Y'); ?>
 					</p>
 					<img src="http://placehold.it/180x180" />
 				</div>

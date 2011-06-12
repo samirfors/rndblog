@@ -76,10 +76,11 @@
           </div>
           <nav class="menu eleven columns">
               <?php wp_page_menu('show_home=1&menu_class=page-navi&sort_column=menu_order'); ?>
+							<?php include (TEMPLATEPATH . '/searchform.php'); ?>
           </nav>
           <!-- <div class="widgets five columns omega">
-              <?php get_search_form(); ?>
-          </div> -->
+                        <?php //get_search_form(); ?>
+                    </div> -->
       </div><!--! end .container -->
     </header>
     <!-- <section class="banner">
