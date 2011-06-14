@@ -71,18 +71,29 @@
 
     <header>
       <div class="container">
+        <div class="row">
           <div class="logo five columns alpha">
             <a href="<?php echo home_url( '/' ); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/klarna_smaller.png" /></a>
           </div>
-          <nav class="menu eleven columns">
+          <nav class="menu eleven columns omega">
               <?php wp_page_menu('show_home=1&menu_class=page-navi&sort_column=menu_order'); ?>
-							<?php include (TEMPLATEPATH . '/searchform.php'); ?>
+							<!-- <?php include (TEMPLATEPATH . '/searchform.php'); ?> -->
           </nav>
+        </div>
           <!-- <div class="widgets five columns omega">
                         <?php //get_search_form(); ?>
                     </div> -->
       </div><!--! end .container -->
     </header>
+    <?php if(is_home() || is_category() || is_single()): ?>
+      <div class="categorymenu">
+        <div class="container">
+          <p>Categories:</p>
+          <?php wp_list_categories("show_option_all=All&title_li="); ?>
+           &nbsp;
+        </div>
+      </div>
+    <?php endif; ?>
     <!-- <section class="banner">
       <div class="container">
       <img src="http://flickholdr.com/934/150/imac,coding/6" alt="Placeholder image from flickholdr.com" />

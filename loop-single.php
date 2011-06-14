@@ -27,7 +27,7 @@
 	<?php /* How to display all other posts. */ ?>
 
 		<article class="post" id="post-<?php the_ID(); ?>">
-			<div class="row">		
+			<div class="row top">		
 		    	<h1><?php the_title(); ?></h1>
 					<p class="metainformation">
 						by <strong><?php echo get_the_author(); ?></strong><br />
@@ -36,7 +36,7 @@
 			</div><!--! end .row -->
 			<div class="row">
 				<div class="leftcontent five columns alpha">
-					<img src="http://placehold.it/240x240" />
+					<?php the_post_thumbnail('post-single'); ?>
 				</div><!--! end .leftcontent -->
 				<div class="postcontent ten columns omega">
 				

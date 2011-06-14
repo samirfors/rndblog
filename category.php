@@ -1,6 +1,6 @@
 <?php
 /**
- * The main template file.
+ * The category template file.
  *
  */
 
@@ -10,7 +10,7 @@ get_header(); ?>
   	<section class="sixteen columns alpha">
 
 			<?php
-			 get_template_part( 'loop', 'page' );
+			 get_template_part( 'loop', 'index' );
 			?>
 		</section><!-- end section -->
 	</div><!-- end .mainarea -->
