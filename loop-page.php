@@ -13,7 +13,8 @@
 			</div><!--! end .row -->
 			<div class="row">
 				<div class="leftcontent five columns alpha">
-					<img src="http://placehold.it/240x300" />
+					<?php the_post_thumbnail('post-single'); ?>
+					&nbsp;
 				</div><!--! end .leftcontent -->
 				<div class="postcontent ten columns omega">
 				
