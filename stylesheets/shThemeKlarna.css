@@ -226,13 +226,13 @@
 }
 
 .syntaxhighlighter {
-  background-color: #eee !important;
+  background-color: #fefefe !important;
 }
 .syntaxhighlighter .line.alt1 {
-  background-color: #eee !important;
+  background-color: #fefefe !important;
 }
 .syntaxhighlighter .line.alt2 {
-  background-color: #eee !important;
+  background-color: #fefefe !important;
 }
 .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
   background-color: #323e41 !important;

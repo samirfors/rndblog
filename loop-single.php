@@ -29,6 +29,12 @@
 		<article class="post" id="post-<?php the_ID(); ?>">
 			<div class="row top">		
 		    	<h1><?php the_title(); ?></h1>
+		    	<div class="useravatar">
+					  <?php 
+					    $uid = get_the_author_meta('user_email');
+               echo get_avatar( $uid, $size = '50', $default = '' ); 
+            ?>
+            </div>
 					<p class="metainformation">
 						by <strong><?php echo get_the_author(); ?></strong><br />
 						<?php the_time('F jS, Y'); ?>
@@ -37,6 +43,7 @@
 			<div class="row">
 				<div class="leftcontent five columns alpha">
 					<?php the_post_thumbnail('post-single'); ?>
+					&nbsp;
 				</div><!--! end .leftcontent -->
 				<div class="postcontent ten columns omega">
 				

@@ -86,13 +86,13 @@
       </div><!--! end .container -->
     </header>
     <?php if(is_home() || is_category() || is_single()): ?>
-      <div class="categorymenu">
-        <div class="container">
-          <p>Categories:</p>
-          <?php wp_list_categories("show_option_all=All&title_li="); ?>
-           &nbsp;
-        </div>
-      </div>
+      <!-- <div class="categorymenu">
+              <div class="container">
+                <p>Categories:</p>
+                <?php wp_list_categories("show_option_all=All&title_li="); ?>
+                 &nbsp;
+              </div>
+            </div> -->
     <?php endif; ?>
     <!-- <section class="banner">
       <div class="container">

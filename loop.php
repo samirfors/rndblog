@@ -23,7 +23,13 @@
 		<article class="post" id="post-<?php the_ID(); ?>">
 			<div class="row top">		
 				<div class="metainformation four columns alpha">
-					<p>
+				  <div class="useravatar">
+					  <?php 
+					    $uid = get_the_author_meta('user_email');
+               echo get_avatar( $uid, $size = '50', $default = '' ); 
+            ?>
+            </div>
+          <p>
 						By: <strong><?php echo get_the_author(); ?></strong> <br /><?php the_time('F jS, Y'); ?>
 					</p>
           <?php the_post_thumbnail(); ?>
